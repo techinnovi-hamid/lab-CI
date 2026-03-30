@@ -1,0 +1,31 @@
+name: CI Pipeline
+
+on: 
+  push: 
+    branchs: ["main"]
+
+jobs: 
+  # Job 1 backend CI pipeline
+  backend-ci:
+    name:  Backend CI (Test + Sonar + Trivy + Push)
+    runs-on: ubuntu-latest
+
+    steps: 
+    - name: Checkout
+      uses: action/checkout@v3
+
+    - name: Build Docker Image
+      run: docker build -t techinnovihamid/app:latest
+      
+    - name: Run Trivy scan
+      uses: aquasecurity/trivy-action@master
+      with: 
+        image-ref: techinnovihamid/app:latest
+    
+    - name: Login to Dockerhub
+      run : echo "${{secrit.DOCKER_PASSWORD}}" | docker login -u "${{secrits.DOCKER_USERNAME}}" --password-stdin
+
+    - name: Push to Dockerhub
+      run : docker push techinnovihamid/app:latest
+
+        
