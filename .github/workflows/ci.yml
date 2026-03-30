@@ -21,7 +21,12 @@ jobs:
       uses: aquasecurity/trivy-action@master
       with: 
         image-ref: techinnovihamid/app:latest
-    
+   
+    - name: Debug Secrets
+      run: |
+        if [ -z "${{ secrets.DOCKER_USERNAME }}" ]; then echo "USERNAME EMPTY"; fi
+        if [ -z "${{ secrets.DOCKER_PASSWORD }}" ]; then echo "PASSWORD EMPTY"; fi
+
     - name: Login to Dockerhub
       run : echo "${{secrets.DOCKER_PASSWORD}}" | docker login -u "${{secrets.DOCKER_USERNAME}}" --password-stdin
 
