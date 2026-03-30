@@ -2,7 +2,7 @@ name: CI Pipeline
 
 on: 
   push: 
-    branchs: ["main"]
+    branches: ["main"]
 
 jobs: 
   # Job 1 backend CI pipeline
@@ -12,10 +12,10 @@ jobs:
 
     steps: 
     - name: Checkout
-      uses: action/checkout@v3
+      uses: actions/checkout@v3
 
     - name: Build Docker Image
-      run: docker build -t techinnovihamid/app:latest
+      run: docker build -t techinnovihamid/app:latest .
       
     - name: Run Trivy scan
       uses: aquasecurity/trivy-action@master
