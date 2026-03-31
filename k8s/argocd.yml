@@ -9,9 +9,9 @@ spec:
     server: https://kubernetes.default.svc
     namespace: default
   source:
-    repoURL: https://github.com/techinnovi-hamid/lab-CI.git/k8s
-    targetRevision: HEAD
-    path: .
+    repoURL: https://github.com/techinnovi-hamid/lab-CI.git
+    targetRevision: main
+    path: k8s
   syncPolicy:
     automated:
       prune: true
